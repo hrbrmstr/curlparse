@@ -1,6 +1,6 @@
 Package: curlparse
 Type: Package
-Title: curlparse title goes here otherwise CRAN checks fail
+Title: Parse 'URLs' with 'libcurl'
 Version: 0.1.0
 Date: 2018-09-10
 Authors@R: c(
@@ -8,17 +8,19 @@ Authors@R: c(
            comment = c(ORCID = "0000-0001-5670-2640"))
   )
 Maintainer: Bob Rudis <bob@rud.is>
-Description: A good description goes here otherwise CRAN checks fail.
+Description: As of version 7.62.0 'libcurl' has exposed its 'URL' parser. Tools 
+    are provided to parse 'URLs' using this new parser feature.
 URL: https://gitlab.com/hrbrmstr/curlparse
 BugReports: https://gitlab.com/hrbrmstr/curlparse/issues
 Encoding: UTF-8
-License: AGPL
+License: MIT + file LICENSE
 Suggests:
     testthat,
     covr
 Depends:
     R (>= 3.2.0)
 Imports:
-    httr,
-    jsonlite
+    stringi,
+    Rcpp
 RoxygenNote: 6.0.1.9000
+LinkingTo: Rcpp

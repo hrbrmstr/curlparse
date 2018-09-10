@@ -1,14 +1,44 @@
 ---
 output: rmarkdown::github_document
+editor_options: 
+  chunk_output_type: console
 ---
-
+```{r include=FALSE}
+knitr::opts_chunk$set(
+  message=FALSE, warning=FALSE, collapse = TRUE
+)
+```
 # curlparse
+
+Parse 'URLs' with 'libcurl'
 
 ## Description
 
+As of version 7.62.0 'libcurl' has exposed its 'URL' parser. Tools are provided to parse 'URLs' using this new parser feature.
+
+**UNTIL `curl`/`libcurl` general release at the end of October you _must_ use the development version which can be cloned and built from <https://github.com/curl/curl>.
+
 ## What's Inside The Tin
 
-The following functions are implemented:
+Core function to turn a vector of URLs into a named `list` of component parts (which can easily be turned into a data frame)
+
+- `parse_curl`:	Parse a character vector of URLs into component parts (deliberately named soas not to conflict with `httr::parse_url()`)
+
+URL validation:
+
+- `is_valid_url`:	Test if a URL is valid (Ref: <https://mathiasbynens.be/demo/url-regex>)
+
+URL component extractors:
+
+- `scheme`:	Extract member components from a URL string
+- `user`:	Extract member components from a URL string
+- `password`:	Extract member components from a URL string
+- `host`/`domain`:	Extract member components from a URL string
+- `port`:	Extract member components from a URL string
+- `path`:	Extract member components from a URL string
+- `query`:	Extract member components from a URL string
+- `url_options`:	Extract member components from a URL string (deliberately named soas not to conflict with `base::options()`)
+- `fragment`:	Extract member components from a URL string
 
 ## Installation
 
@@ -30,3 +60,76 @@ packageVersion("curlparse")
 
 ```
 
+### Process Some URLs
+
+```{r libs}
+library(rvest)
+library(curlparse)
+library(tidyverse)
+
+```
+```{r cache=TRUE}
+read_html("https://www.r-bloggers.com/blogs-list/") %>% 
+  html_nodes(xpath=".//li[contains(., 'Contributing Blogs')]/ul/li/a[contains(@href, 'http')]") %>% 
+  html_attr("href") -> blog_urls
+
+```
+```{r}
+(parsed <- parse_curl(blog_urls))
+
+count(parsed, scheme, sort=TRUE)
+
+filter(parsed, !is.na(query))
+```
+
+### Stress Test
+
+```{r}
+c(
+  "", "foo", "foo;params?query#fragment", "http://foo.com/path", "http://foo.com",
+  "//foo.com/path", "//user:pass@foo.com/", "http://user:pass@foo.com/", 
+  "file:///tmp/junk.txt", "imap://mail.python.org/mbox1",
+  "mms://wms.sys.hinet.net/cts/Drama/09006251100.asf", "nfs://server/path/to/file.txt",
+  "svn+ssh://svn.zope.org/repos/main/ZConfig/trunk/",
+  "git+ssh://git@github.com/user/project.git", "HTTP://WWW.PYTHON.ORG/doc/#frag",
+  "http://www.python.org:080/", "http://www.python.org:/", "javascript:console.log('hello')",
+  "javascript:console.log('hello');console.log('world')", "http://example.com/?", 
+  "http://example.com/;", "tel:0108202201", "unknown:0108202201",
+  "http://user@example.com:8080/path;param?query#fragment", 
+  "http://www.python.org:65536/", "http://www.python.org:-20/",
+  "http://www.python.org:8589934592/", "http://www.python.org:80hello/", 
+  "http://:::cnn.com/", "http://./", "http://foo..com/", "http://foo../"
+) -> ugly_urls
+
+(u_parsed <- parse_curl(ugly_urls))
+
+filter(u_parsed, !is.na(scheme))
+
+filter(u_parsed, !is.na(user))
+
+filter(u_parsed, !is.na(password))
+
+filter(u_parsed, !is.na(host))
+
+filter(u_parsed, !is.na(path))
+
+filter(u_parsed, !is.na(query))
+
+filter(u_parsed, !is.na(fragment))
+```
+
+Make sure the vector extractors work the same as the data frame converter:
+
+```{r}
+all(
+  c(
+    identical(u_parsed$scheme, scheme(ugly_urls)),
+    identical(u_parsed$user, user(ugly_urls)),
+    identical(u_parsed$password, password(ugly_urls)),
+    identical(u_parsed$host, host(ugly_urls)),
+    identical(u_parsed$path, path(ugly_urls)),
+    identical(u_parsed$query, query(ugly_urls)),
+    identical(u_parsed$fragment, fragment(ugly_urls))
+  )
+)
+```
