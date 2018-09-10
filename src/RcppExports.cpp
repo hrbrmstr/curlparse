@@ -16,6 +16,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// url_parse
+DataFrame url_parse(CharacterVector urls);
+RcppExport SEXP _curlparse_url_parse(SEXP urlsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector >::type urls(urlsSEXP);
+    rcpp_result_gen = Rcpp::wrap(url_parse(urls));
+    return rcpp_result_gen;
+END_RCPP
+}
 // scheme
 CharacterVector scheme(CharacterVector urls);
 RcppExport SEXP _curlparse_scheme(SEXP urlsSEXP) {
@@ -118,6 +129,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_curlparse_parse_curl", (DL_FUNC) &_curlparse_parse_curl, 1},
+    {"_curlparse_url_parse", (DL_FUNC) &_curlparse_url_parse, 1},
     {"_curlparse_scheme", (DL_FUNC) &_curlparse_scheme, 1},
     {"_curlparse_user", (DL_FUNC) &_curlparse_user, 1},
     {"_curlparse_password", (DL_FUNC) &_curlparse_password, 1},

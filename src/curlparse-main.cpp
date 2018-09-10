@@ -91,13 +91,81 @@ DataFrame parse_curl(CharacterVector urls) {
     _["query"] = query_vec,
     _["fragment"] = fragment_vec,
     _["stringsAsFactors"] = false
-);
+  );
 
   out.attr("class") = CharacterVector::create("tbl_df", "tbl", "data.frame");
 
   return(out);
 
 }
+
+
+//' Parse a character vector of URLs into component parts (`urltools` compatibility function)
+//'
+//' @md
+//' @param urls character vector of URLs
+//' @return data frame (not a tibble)
+//' @export
+// [[Rcpp::export]]
+DataFrame url_parse(CharacterVector urls) {
+
+  unsigned int input_size = urls.size();
+
+  CharacterVector scheme_vec(input_size);
+  CharacterVector host_vec(input_size);
+  CharacterVector port_vec(input_size);
+  CharacterVector path_vec(input_size);
+  CharacterVector query_vec(input_size);
+  CharacterVector fragment_vec(input_size);
+
+  CURLUcode rc;
+  CURLU *url;
+
+  for (unsigned int i = 0; i < input_size; i++) {
+
+    url = curl_url();
+    rc = curl_url_set(
+      url, CURLUPART_URL, Rcpp::as<std::string>(urls[i]).c_str(), 0
+    );
+
+    if (!rc) {
+
+      scheme_vec[i] = lc_url_get(url, CURLUPART_SCHEME, CURLU_DEFAULT_SCHEME);
+      host_vec[i] = lc_url_get(url, CURLUPART_HOST);
+      port_vec[i] = lc_url_get(url, CURLUPART_PORT, CURLU_DEFAULT_PORT);
+      path_vec[i] = lc_url_get(url, CURLUPART_PATH, CURLU_URLDECODE);
+      query_vec[i] = lc_url_get(url, CURLUPART_QUERY, CURLU_URLDECODE);
+      fragment_vec[i] = lc_url_get(url, CURLUPART_FRAGMENT);
+
+    } else {
+
+      scheme_vec[i] = NA_STRING;
+      host_vec[i] = NA_STRING;
+      port_vec[i] = NA_STRING;
+      path_vec[i] = NA_STRING;
+      query_vec[i] = NA_STRING;
+      fragment_vec[i] = NA_STRING;
+
+    }
+
+    curl_url_cleanup(url);
+
+  }
+
+  DataFrame out = DataFrame::create(
+    _["scheme"] = scheme_vec,
+    _["domain"] = host_vec,
+    _["port"] = port_vec,
+    _["path"] = path_vec,
+    _["query"] = query_vec,
+    _["fragment"] = fragment_vec,
+    _["stringsAsFactors"] = false
+  );
+
+  return(out);
+
+}
+
 
 CharacterVector lc_part(CharacterVector urls, CURLUPart what, unsigned int flags = 0) {
 

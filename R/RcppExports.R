@@ -11,6 +11,16 @@ parse_curl <- function(urls) {
     .Call('_curlparse_parse_curl', PACKAGE = 'curlparse', urls)
 }
 
+#' Parse a character vector of URLs into component parts (`urltools` compatibility function)
+#'
+#' @md
+#' @param urls character vector of URLs
+#' @return data frame (not a tibble)
+#' @export
+url_parse <- function(urls) {
+    .Call('_curlparse_url_parse', PACKAGE = 'curlparse', urls)
+}
+
 #' Extract member components from a URL string
 #'
 #' @md

@@ -1,10 +1,4 @@
 base
-methods
-datasets
-utils
-grDevices
-graphics
-stats
 curlparse
 xml2
 rvest
@@ -17,3 +11,4 @@ purrr
 dplyr
 stringr
 forcats
+urltools
