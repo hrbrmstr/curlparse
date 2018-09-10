@@ -1,3 +1,7 @@
-CXX_STD = CXX11
-PKG_CXXFLAGS =
-PKG_LIBS = -lcurl
+PKG_CPPFLAGS=-I/usr/local/include
+PKG_LIBS=-L/usr/local/lib -lcurl
+
+all: clean
+
+clean:
+	rm -f $(SHLIB) $(OBJECTS)
