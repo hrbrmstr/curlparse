@@ -1,6 +1,7 @@
 #include <Rcpp.h>
 
 #include <curl/curl.h>
+#include <curl/urlapi.h>
 
 using namespace Rcpp;
 
