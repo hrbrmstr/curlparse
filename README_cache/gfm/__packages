@@ -1,5 +1,14 @@
 base
+methods
+bit
+utils
+stats
+bit64
+datasets
+grDevices
+graphics
 curlparse
+urltools
 xml2
 rvest
 tidyverse
@@ -11,4 +20,3 @@ purrr
 dplyr
 stringr
 forcats
-urltools

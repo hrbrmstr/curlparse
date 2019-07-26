@@ -1,48 +1,50 @@
 
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Signed
+by](https://img.shields.io/badge/Keybase-Verified-brightgreen.svg)](https://keybase.io/hrbrmstr)
+![Signed commit
+%](https://img.shields.io/badge/Signed_Commits-100%25-lightgrey.svg)
+[![Linux build
+Status](https://travis-ci.org/hrbrmstr/curlparse.svg?branch=master)](https://travis-ci.org/hrbrmstr/curlparse)
+[![Coverage
+Status](https://codecov.io/gh/hrbrmstr/curlparse/branch/master/graph/badge.svg)](https://codecov.io/gh/hrbrmstr/curlparse)
+![Minimal R
+Version](https://img.shields.io/badge/R%3E%3D-3.2.0-blue.svg)
+![License](https://img.shields.io/badge/License-MIT-blue.svg)
+
 # curlparse
 
 Parse ‘URLs’ with ‘libcurl’
 
 ## Description
 
-As of version 7.62.0 ‘libcurl’ has exposed its ‘URL’ parser. Tools are
-provided to parse ‘URLs’ using this new parser feature.
-
-**UNTIL `curl`/`libcurl` general release at the end of October you
-*must* use the development version which can be cloned and built from
-<https://github.com/curl/curl>.**
+Tools are provided to parse URLs using the modern ‘libcurl’ built-in
+parser.
 
 ## What’s Inside The Tin
 
-Core function to turn a vector of URLs into a named `list` of component
-parts (which can easily be turned into a data frame)
+The following functions are implemented:
 
+  - `is_valid_url`: Test if a URL is a valid URL
   - `parse_curl`: Parse a character vector of URLs into component parts
-    (deliberately named soas not to conflict with `httr::parse_url()`)
-
-URL validation:
-
-  - `is_valid_url`: Test if a URL is valid (Ref:
-    <https://mathiasbynens.be/demo/url-regex>)
-
-URL component extractors:
-
   - `scheme`: Extract member components from a URL string
-  - `user`: Extract member components from a URL string
-  - `password`: Extract member components from a URL string
-  - `host`/`domain`: Extract member components from a URL string
-  - `port`: Extract member components from a URL string
-  - `path`: Extract member components from a URL string
-  - `query`: Extract member components from a URL string
-  - `url_options`: Extract member components from a URL string
-    (deliberately named soas not to conflict with `base::options()`)
-  - `fragment`: Extract member components from a URL string
+  - `url_parse`: Parse a character vector of URLs into component parts
+    (urltools compatibility function)
 
 ## Installation
 
 ``` r
-devtools::install_github("hrbrmstr/curlparse")
+remotes::install_git("https://git.sr.ht/~hrbrmstr/curlparse")
+# or
+remotes::install_gitlab("hrbrmstr/curlparse")
+# or
+remotes::install_github("hrbrmstr/curlparse")
 ```
+
+NOTE: To use the ‘remotes’ install options you will need to have the
+[{remotes} package](https://github.com/r-lib/remotes) installed.
 
 ## Usage
 
@@ -51,7 +53,7 @@ library(curlparse)
 
 # current verison
 packageVersion("curlparse")
-## [1] '0.1.0'
+## [1] '0.2.0'
 ```
 
 ### Process Some URLs
@@ -71,34 +73,39 @@ read_html("https://www.r-bloggers.com/blogs-list/") %>%
 
 ``` r
 (parsed <- parse_curl(blog_urls))
-## # A tibble: 794 x 9
+## # A tibble: 977 x 9
 ##    scheme user  password host                    port  path            options query fragment
 ##    <chr>  <chr> <chr>    <chr>                   <chr> <chr>           <chr>   <chr> <chr>   
-##  1 http   <NA>  <NA>     dmlc.ml                 80    /               <NA>    <NA>  <NA>    
-##  2 https  <NA>  <NA>     lionel-.github.io       443   /               <NA>    <NA>  <NA>    
-##  3 https  <NA>  <NA>     jean9208.github.io      443   /rss-R.xml      <NA>    <NA>  <NA>    
-##  4 https  <NA>  <NA>     ryouready.wordpress.com 443   /               <NA>    <NA>  <NA>    
-##  5 https  <NA>  <NA>     rveryday.wordpress.com  443   /               <NA>    <NA>  <NA>    
-##  6 http   <NA>  <NA>     www.talyarkoni.org      80    /blog           <NA>    <NA>  <NA>    
-##  7 https  <NA>  <NA>     rtricks.wordpress.com   443   /               <NA>    <NA>  <NA>    
-##  8 http   <NA>  <NA>     mgritts.com             80    /feed.r.xml     <NA>    <NA>  <NA>    
-##  9 http   <NA>  <NA>     blog.ambodi.com         80    /               <NA>    <NA>  <NA>    
-## 10 https  <NA>  <NA>     xcafebabe.blogspot.com  443   /search/label/R <NA>    <NA>  <NA>    
-## # ... with 784 more rows
+##  1 http   <NA>  <NA>     reichlab.io             80    /               <NA>    <NA>  <NA>    
+##  2 http   <NA>  <NA>     dmlc.ml                 80    /               <NA>    <NA>  <NA>    
+##  3 https  <NA>  <NA>     lionel-.github.io       443   /               <NA>    <NA>  <NA>    
+##  4 https  <NA>  <NA>     jean9208.github.io      443   /rss-R.xml      <NA>    <NA>  <NA>    
+##  5 https  <NA>  <NA>     ryouready.wordpress.com 443   /               <NA>    <NA>  <NA>    
+##  6 https  <NA>  <NA>     rveryday.wordpress.com  443   /               <NA>    <NA>  <NA>    
+##  7 http   <NA>  <NA>     www.talyarkoni.org      80    /blog           <NA>    <NA>  <NA>    
+##  8 https  <NA>  <NA>     rtricks.wordpress.com   443   /               <NA>    <NA>  <NA>    
+##  9 https  <NA>  <NA>     xcafebabe.blogspot.com  443   /search/label/R <NA>    <NA>  <NA>    
+## 10 http   <NA>  <NA>     4dpiecharts.com         80    /               <NA>    <NA>  <NA>    
+## # … with 967 more rows
 
 count(parsed, scheme, sort=TRUE)
 ## # A tibble: 2 x 2
 ##   scheme     n
 ##   <chr>  <int>
-## 1 https    467
-## 2 http     327
+## 1 https    618
+## 2 http     359
 
 filter(parsed, !is.na(query))
-## # A tibble: 2 x 9
-##   scheme user  password host             port  path                  options query                             fragment
-##   <chr>  <chr> <chr>    <chr>            <chr> <chr>                 <chr>   <chr>                             <chr>   
-## 1 https  <NA>  <NA>     blog.datazar.com 443   /tagged/r-language    <NA>    source=rss----e2c7e6e1c75--r_lan… <NA>    
-## 2 https  <NA>  <NA>     kevinkuang.net   443   /tagged/r-programming <NA>    source=rss----a1ff9aea4bf1--r_pr… <NA>
+## # A tibble: 7 x 9
+##   scheme user  password host                   port  path               options query                           fragment
+##   <chr>  <chr> <chr>    <chr>                  <chr> <chr>              <chr>   <chr>                           <chr>   
+## 1 http   <NA>  <NA>     freakonometrics.blog.… 80    /index.php         <NA>    ""                              <NA>    
+## 2 http   <NA>  <NA>     ludvigolsen.dk         80    /                  <NA>    lang=en                         <NA>    
+## 3 https  <NA>  <NA>     medium.com             443   /principles-0/tag… <NA>    source=rss----489c2dec8959--r   <NA>    
+## 4 https  <NA>  <NA>     medium.com             443   /tim-black/tagged… <NA>    source=rss----d71cf9ecf7ec--r   <NA>    
+## 5 https  <NA>  <NA>     kevinkuang.net         443   /tagged/r-program… <NA>    source=rss----a1ff9aea4bf1--r_… <NA>    
+## 6 https  <NA>  <NA>     medium.com             443   /@MattOldach_65321 <NA>    source=rss-459e62b88a2a------2  <NA>    
+## 7 https  <NA>  <NA>     medium.com             443   /@zappingseb       <NA>    source=rss-dbc9f652035a------2  <NA>
 ```
 
 ### Benchmark
@@ -108,7 +115,7 @@ this package for current users of `urltools::url_parse()` since it
 provides the same API and same results back (including it being a
 regular data frame and not a `tbl`).
 
-Spoiler alert: `urltools::url_parse()` is faster by ~100µs (per-100
+Spoiler alert: `urltools::url_parse()` is faster by \~100µs (per-100
 URLs) for “good” URLs (if there’s a mix of gnarly/bad URLs and valid
 ones they get closer to being on-par). The aim was not to try to beat
 it, though.
@@ -151,14 +158,14 @@ microbenchmark(
 
 mb
 ## Unit: microseconds
-##       expr     min       lq     mean   median       uq      max neval
-##  curlparse 753.914 831.5750 896.4327 859.1640 896.8245 4597.547   500
-##   urltools 647.077 710.7115 768.3054 734.9985 766.3750 4163.394   500
+##       expr     min       lq     mean   median       uq      max neval cld
+##  curlparse 810.579 855.6420 906.5393 890.2775 929.2810 4404.267   500   b
+##   urltools 667.676 711.7175 766.3760 735.4835 771.1215 4704.806   500  a
 
 autoplot(mb)
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-7-1.png" width="672" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="672" />
 
 The individual handlers are a bit more on-par but mostly still slower
 (except for `fragment()`). Note that `urltools` has no equivalent
@@ -190,7 +197,7 @@ bind_rows(
   theme(panel.spacing.y=unit(0, "lines"))
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-8-1.png" width="576" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="576" />
 
 ### Stress Test
 
@@ -225,10 +232,10 @@ c(
 ##  8 http   user  pass     foo.com         80    /             <NA>    <NA>  <NA>    
 ##  9 file   <NA>  <NA>     <NA>            0     /tmp/junk.txt <NA>    <NA>  <NA>    
 ## 10 imap   <NA>  <NA>     mail.python.org 143   /mbox1        <NA>    <NA>  <NA>    
-## # ... with 22 more rows
+## # … with 22 more rows
 
 filter(u_parsed, !is.na(scheme))
-## # A tibble: 13 x 9
+## # A tibble: 14 x 9
 ##    scheme user  password host            port  path          options query fragment
 ##    <chr>  <chr> <chr>    <chr>           <chr> <chr>         <chr>   <chr> <chr>   
 ##  1 http   <NA>  <NA>     foo.com         80    /path         <NA>    <NA>  <NA>    
@@ -238,12 +245,13 @@ filter(u_parsed, !is.na(scheme))
 ##  5 imap   <NA>  <NA>     mail.python.org 143   /mbox1        <NA>    <NA>  <NA>    
 ##  6 http   <NA>  <NA>     WWW.PYTHON.ORG  80    /doc/         <NA>    <NA>  frag    
 ##  7 http   <NA>  <NA>     www.python.org  80    /             <NA>    <NA>  <NA>    
-##  8 http   <NA>  <NA>     example.com     80    /             <NA>    <NA>  <NA>    
-##  9 http   <NA>  <NA>     example.com     80    /;            <NA>    <NA>  <NA>    
-## 10 http   user  <NA>     example.com     8080  /path;param   <NA>    query fragment
-## 11 http   <NA>  <NA>     .               80    /             <NA>    <NA>  <NA>    
-## 12 http   <NA>  <NA>     foo..com        80    /             <NA>    <NA>  <NA>    
-## 13 http   <NA>  <NA>     foo..           80    /             <NA>    <NA>  <NA>
+##  8 http   <NA>  <NA>     www.python.org  80    /             <NA>    <NA>  <NA>    
+##  9 http   <NA>  <NA>     example.com     80    /             <NA>    ""    <NA>    
+## 10 http   <NA>  <NA>     example.com     80    /;            <NA>    <NA>  <NA>    
+## 11 http   user  <NA>     example.com     8080  /path;param   <NA>    query fragment
+## 12 http   <NA>  <NA>     .               80    /             <NA>    <NA>  <NA>    
+## 13 http   <NA>  <NA>     foo..com        80    /             <NA>    <NA>  <NA>    
+## 14 http   <NA>  <NA>     foo..           80    /             <NA>    <NA>  <NA>
 
 filter(u_parsed, !is.na(user))
 ## # A tibble: 2 x 9
@@ -259,7 +267,7 @@ filter(u_parsed, !is.na(password))
 ## 1 http   user  pass     foo.com 80    /     <NA>    <NA>  <NA>
 
 filter(u_parsed, !is.na(host))
-## # A tibble: 12 x 9
+## # A tibble: 13 x 9
 ##    scheme user  password host            port  path        options query fragment
 ##    <chr>  <chr> <chr>    <chr>           <chr> <chr>       <chr>   <chr> <chr>   
 ##  1 http   <NA>  <NA>     foo.com         80    /path       <NA>    <NA>  <NA>    
@@ -268,15 +276,16 @@ filter(u_parsed, !is.na(host))
 ##  4 imap   <NA>  <NA>     mail.python.org 143   /mbox1      <NA>    <NA>  <NA>    
 ##  5 http   <NA>  <NA>     WWW.PYTHON.ORG  80    /doc/       <NA>    <NA>  frag    
 ##  6 http   <NA>  <NA>     www.python.org  80    /           <NA>    <NA>  <NA>    
-##  7 http   <NA>  <NA>     example.com     80    /           <NA>    <NA>  <NA>    
-##  8 http   <NA>  <NA>     example.com     80    /;          <NA>    <NA>  <NA>    
-##  9 http   user  <NA>     example.com     8080  /path;param <NA>    query fragment
-## 10 http   <NA>  <NA>     .               80    /           <NA>    <NA>  <NA>    
-## 11 http   <NA>  <NA>     foo..com        80    /           <NA>    <NA>  <NA>    
-## 12 http   <NA>  <NA>     foo..           80    /           <NA>    <NA>  <NA>
+##  7 http   <NA>  <NA>     www.python.org  80    /           <NA>    <NA>  <NA>    
+##  8 http   <NA>  <NA>     example.com     80    /           <NA>    ""    <NA>    
+##  9 http   <NA>  <NA>     example.com     80    /;          <NA>    <NA>  <NA>    
+## 10 http   user  <NA>     example.com     8080  /path;param <NA>    query fragment
+## 11 http   <NA>  <NA>     .               80    /           <NA>    <NA>  <NA>    
+## 12 http   <NA>  <NA>     foo..com        80    /           <NA>    <NA>  <NA>    
+## 13 http   <NA>  <NA>     foo..           80    /           <NA>    <NA>  <NA>
 
 filter(u_parsed, !is.na(path))
-## # A tibble: 13 x 9
+## # A tibble: 14 x 9
 ##    scheme user  password host            port  path          options query fragment
 ##    <chr>  <chr> <chr>    <chr>           <chr> <chr>         <chr>   <chr> <chr>   
 ##  1 http   <NA>  <NA>     foo.com         80    /path         <NA>    <NA>  <NA>    
@@ -286,18 +295,20 @@ filter(u_parsed, !is.na(path))
 ##  5 imap   <NA>  <NA>     mail.python.org 143   /mbox1        <NA>    <NA>  <NA>    
 ##  6 http   <NA>  <NA>     WWW.PYTHON.ORG  80    /doc/         <NA>    <NA>  frag    
 ##  7 http   <NA>  <NA>     www.python.org  80    /             <NA>    <NA>  <NA>    
-##  8 http   <NA>  <NA>     example.com     80    /             <NA>    <NA>  <NA>    
-##  9 http   <NA>  <NA>     example.com     80    /;            <NA>    <NA>  <NA>    
-## 10 http   user  <NA>     example.com     8080  /path;param   <NA>    query fragment
-## 11 http   <NA>  <NA>     .               80    /             <NA>    <NA>  <NA>    
-## 12 http   <NA>  <NA>     foo..com        80    /             <NA>    <NA>  <NA>    
-## 13 http   <NA>  <NA>     foo..           80    /             <NA>    <NA>  <NA>
+##  8 http   <NA>  <NA>     www.python.org  80    /             <NA>    <NA>  <NA>    
+##  9 http   <NA>  <NA>     example.com     80    /             <NA>    ""    <NA>    
+## 10 http   <NA>  <NA>     example.com     80    /;            <NA>    <NA>  <NA>    
+## 11 http   user  <NA>     example.com     8080  /path;param   <NA>    query fragment
+## 12 http   <NA>  <NA>     .               80    /             <NA>    <NA>  <NA>    
+## 13 http   <NA>  <NA>     foo..com        80    /             <NA>    <NA>  <NA>    
+## 14 http   <NA>  <NA>     foo..           80    /             <NA>    <NA>  <NA>
 
 filter(u_parsed, !is.na(query))
-## # A tibble: 1 x 9
+## # A tibble: 2 x 9
 ##   scheme user  password host        port  path        options query fragment
 ##   <chr>  <chr> <chr>    <chr>       <chr> <chr>       <chr>   <chr> <chr>   
-## 1 http   user  <NA>     example.com 8080  /path;param <NA>    query fragment
+## 1 http   <NA>  <NA>     example.com 80    /           <NA>    ""    <NA>    
+## 2 http   user  <NA>     example.com 8080  /path;param <NA>    query fragment
 
 filter(u_parsed, !is.na(fragment))
 ## # A tibble: 2 x 9
@@ -324,3 +335,20 @@ all(
 )
 ## [1] TRUE
 ```
+
+## curlparse Metrics
+
+| Lang         | \# Files |  (%) |  LoC |  (%) | Blank lines |  (%) | \# Lines |  (%) |
+| :----------- | -------: | ---: | ---: | ---: | ----------: | ---: | -------: | ---: |
+| C            |       21 | 0.41 | 1773 | 0.49 |         336 | 0.63 |      216 | 0.21 |
+| C/C++ Header |        3 | 0.06 |  844 | 0.23 |          10 | 0.02 |        1 | 0.00 |
+| R            |       23 | 0.45 |  612 | 0.17 |          75 | 0.14 |      699 | 0.68 |
+| C++          |        2 | 0.04 |  285 | 0.08 |          65 | 0.12 |       58 | 0.06 |
+| Rmd          |        1 | 0.02 |   85 | 0.02 |          49 | 0.09 |       59 | 0.06 |
+| Bourne Shell |        1 | 0.02 |    2 | 0.00 |           0 | 0.00 |        0 | 0.00 |
+
+## Code of Conduct
+
+Please note that this project is released with a Contributor Code of
+Conduct. By participating in this project you agree to abide by its
+terms.

@@ -9,14 +9,13 @@
 As of version 7.62.0 'libcurl' has exposed its 'URL' parser. Tools are
 provided to parse 'URLs' using this new parser feature.
 }
-\details{
-**UNTIL \code{curl}/\code{libcurl} general release at the end of October you \emph{must}
-use the development version which can be cloned and built from
-\url{https://github.com/curl/curl}.
+\seealso{
+Useful links:
 \itemize{
-\item URL: \url{https://gitlab.com/hrbrmstr/curlparse}
-\item BugReports: \url{https://gitlab.com/hrbrmstr/curlparse/issues}
+  \item \url{https://gitlab.com/hrbrmstr/curlparse}
+  \item Report bugs at \url{https://gitlab.com/hrbrmstr/curlparse/issues}
 }
+
 }
 \author{
 Bob Rudis (bob@rud.is)

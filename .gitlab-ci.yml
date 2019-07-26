@@ -1,5 +1,5 @@
 image: rocker/tidyverse
-test:  
+test:
    script:
     - R -e 'install.packages(c("testthat", "covr", "Rcpp", "stringi", "knitr", "rmarkdown"))'
     - R CMD build . --no-build-vignettes --no-manual

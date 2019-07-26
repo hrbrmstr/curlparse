@@ -1,12 +1,12 @@
 ---
 output: rmarkdown::github_document
-editor_options: 
-  chunk_output_type: console
 ---
-```{r include=FALSE}
-knitr::opts_chunk$set(
-  message=FALSE, warning=FALSE, collapse = TRUE, fig.retina=2
-)
+```{r pkg-knitr-opts, include=FALSE}
+hrbrpkghelpr::global_opts()
+```
+
+```{r badges, results='asis', echo=FALSE, cache=FALSE}
+hrbrpkghelpr::stinking_badges()
 ```
 # curlparse
 
@@ -14,40 +14,20 @@ Parse 'URLs' with 'libcurl'
 
 ## Description
 
-As of version 7.62.0 'libcurl' has exposed its 'URL' parser. Tools are provided to parse 'URLs' using this new parser feature.
-
-**UNTIL `curl`/`libcurl` general release at the end of October you _must_ use the development version which can be cloned and built from <https://github.com/curl/curl>.**
+Tools are provided to parse URLs using the modern 'libcurl' built-in parser.
 
 ## What's Inside The Tin
 
-Core function to turn a vector of URLs into a named `list` of component parts (which can easily be turned into a data frame)
+The following functions are implemented:
 
-- `parse_curl`:	Parse a character vector of URLs into component parts (deliberately named soas not to conflict with `httr::parse_url()`)
-
-URL validation:
-
-- `is_valid_url`:	Test if a URL is valid (Ref: <https://mathiasbynens.be/demo/url-regex>)
-
-URL component extractors:
-
-- `scheme`:	Extract member components from a URL string
-- `user`:	Extract member components from a URL string
-- `password`:	Extract member components from a URL string
-- `host`/`domain`:	Extract member components from a URL string
-- `port`:	Extract member components from a URL string
-- `path`:	Extract member components from a URL string
-- `query`:	Extract member components from a URL string
-- `url_options`:	Extract member components from a URL string (deliberately named soas not to conflict with `base::options()`)
-- `fragment`:	Extract member components from a URL string
+```{r ingredients, results='asis', echo=FALSE, cache=FALSE}
+hrbrpkghelpr::describe_ingredients()
+```
 
 ## Installation
 
-```{r eval=FALSE}
-devtools::install_github("hrbrmstr/curlparse")
-```
-
-```{r message=FALSE, warning=FALSE, error=FALSE, include=FALSE}
-options(width=120)
+```{r install-ex, results='asis', echo = FALSE}
+hrbrpkghelpr::install_block()
 ```
 
 ## Usage
@@ -199,3 +179,15 @@ all(
   )
 )
 ```
+
+## curlparse Metrics
+
+```{r cloc, echo=FALSE}
+cloc::cloc_pkg_md()
+```
+
+## Code of Conduct
+
+Please note that this project is released with a Contributor Code of Conduct.
+By participating in this project you agree to abide by its terms.
+
