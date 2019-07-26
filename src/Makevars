@@ -1,8 +1,0 @@
-PKG_CFLAGS=$(C_VISIBILITY)
-PKG_CPPFLAGS=-I/usr/local/include -DSTRICT_R_HEADERS
-PKG_LIBS=-L/usr/local/lib -lcurl
-
-all: clean
-
-clean:
-	rm -f $(SHLIB) $(OBJECTS)
