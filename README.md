@@ -5,9 +5,11 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![Signed
 by](https://img.shields.io/badge/Keybase-Verified-brightgreen.svg)](https://keybase.io/hrbrmstr)
 ![Signed commit
-%](https://img.shields.io/badge/Signed_Commits-100%25-lightgrey.svg)
+%](https://img.shields.io/badge/Signed_Commits-77.8%25-lightgrey.svg)
 [![Linux build
 Status](https://travis-ci.org/hrbrmstr/curlparse.svg?branch=master)](https://travis-ci.org/hrbrmstr/curlparse)
+[![Windows build
+status](https://ci.appveyor.com/api/projects/status/github/hrbrmstr/curlparse?svg=true)](https://ci.appveyor.com/project/hrbrmstr/curlparse)
 [![Coverage
 Status](https://codecov.io/gh/hrbrmstr/curlparse/branch/master/graph/badge.svg)](https://codecov.io/gh/hrbrmstr/curlparse)
 ![Minimal R
@@ -158,9 +160,9 @@ microbenchmark(
 
 mb
 ## Unit: microseconds
-##       expr     min       lq     mean   median       uq      max neval cld
-##  curlparse 810.579 855.6420 906.5393 890.2775 929.2810 4404.267   500   b
-##   urltools 667.676 711.7175 766.3760 735.4835 771.1215 4704.806   500  a
+##       expr     min      lq     mean   median       uq      max neval cld
+##  curlparse 799.909 842.713 907.3988 881.0535 924.5220 4892.528   500   b
+##   urltools 657.364 693.869 745.7828 721.2950 768.6505 4292.258   500  a
 
 autoplot(mb)
 ```
@@ -338,14 +340,12 @@ all(
 
 ## curlparse Metrics
 
-| Lang         | \# Files |  (%) |  LoC |  (%) | Blank lines |  (%) | \# Lines |  (%) |
-| :----------- | -------: | ---: | ---: | ---: | ----------: | ---: | -------: | ---: |
-| C            |       21 | 0.41 | 1773 | 0.49 |         336 | 0.63 |      216 | 0.21 |
-| C/C++ Header |        3 | 0.06 |  844 | 0.23 |          10 | 0.02 |        1 | 0.00 |
-| R            |       23 | 0.45 |  612 | 0.17 |          75 | 0.14 |      699 | 0.68 |
-| C++          |        2 | 0.04 |  285 | 0.08 |          65 | 0.12 |       58 | 0.06 |
-| Rmd          |        1 | 0.02 |   85 | 0.02 |          49 | 0.09 |       59 | 0.06 |
-| Bourne Shell |        1 | 0.02 |    2 | 0.00 |           0 | 0.00 |        0 | 0.00 |
+| Lang         | \# Files | (%) | LoC |  (%) | Blank lines |  (%) | \# Lines |  (%) |
+| :----------- | -------: | --: | --: | ---: | ----------: | ---: | -------: | ---: |
+| C++          |        2 | 0.2 | 286 | 0.68 |          65 | 0.51 |       58 | 0.32 |
+| Rmd          |        1 | 0.1 |  85 | 0.20 |          49 | 0.38 |       59 | 0.32 |
+| R            |        6 | 0.6 |  46 | 0.11 |          14 | 0.11 |       67 | 0.36 |
+| Bourne Shell |        1 | 0.1 |   2 | 0.00 |           0 | 0.00 |        0 | 0.00 |
 
 ## Code of Conduct
 
