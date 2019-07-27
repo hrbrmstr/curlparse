@@ -9,7 +9,7 @@ Authors@R: c( person("Bob", "Rudis", email = "bob@rud.is", role =
         "0000-0002-4035-0289")) )
 Description: Tools are provided to parse URLs using the modern
         'libcurl' built-in parser.
-License: MIT + file LICENSE
+License: Z
 SystemRequirements: libcurl: libcurl-devel (rpm) or
         libcurl4-openssl-dev (deb).
 URL: https://gitlab.com/hrbrmstr/curlparse
