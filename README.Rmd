@@ -16,6 +16,22 @@ Parse 'URLs' with 'libcurl'
 
 Tools are provided to parse URLs using the modern 'libcurl' built-in parser.
 
+## NOTE
+
+You _need_ to have `libcurl` >= 7.62.0 for this to work since that's when it began to expose the URL parsing API. 
+
+macOS users can do:
+
+```
+$ brew install curl
+```
+
+(provided you're using [Homebrew](https://brew.sh/)).
+
+Windows users are able to just install this pacakge since it uses the same, clever "anticonf" that Jeroen uses in the [{curl} pacakge](https://github.com/jeroen/curl). 
+
+The state of the availability of `libcurl` v7.62.0 across Linux distributions is sketch at best (as an example, Ubuntu bionic and comic are not even remotely at the current version). If your distribution does not have >= 7.62.0 available you will need to [compile and install it manually](https://curl.haxx.se/download.html) ensuring the library and headers are available to R to build the package.
+
 ## What's Inside The Tin
 
 The following functions are implemented:

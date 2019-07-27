@@ -1,0 +1,9 @@
+All R and C[++] code is MIT licensed as noted in the DESCRIPTION
+
+This package uses the "anticonf" configuration script from
+Jeroen Ooms' {curl} package
+(https://github.com/jeroen/curl/blob/master/DESCRIPTION)
+which is also MIT licensed with the following COPYRIGHT:
+
+YEAR: 2019
+COPYRIGHT HOLDER: Jeroen Ooms; RStudio

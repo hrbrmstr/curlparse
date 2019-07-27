@@ -5,7 +5,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![Signed
 by](https://img.shields.io/badge/Keybase-Verified-brightgreen.svg)](https://keybase.io/hrbrmstr)
 ![Signed commit
-%](https://img.shields.io/badge/Signed_Commits-77.8%25-lightgrey.svg)
+%](https://img.shields.io/badge/Signed_Commits-80.0%25-lightgrey.svg)
 [![Linux build
 Status](https://travis-ci.org/hrbrmstr/curlparse.svg?branch=master)](https://travis-ci.org/hrbrmstr/curlparse)
 [![Windows build
@@ -24,6 +24,28 @@ Parse ‘URLs’ with ‘libcurl’
 
 Tools are provided to parse URLs using the modern ‘libcurl’ built-in
 parser.
+
+## NOTE
+
+You *need* to have `libcurl` \>= 7.62.0 for this to work since that’s
+when it began to expose the URL parsing API.
+
+macOS users can do:
+
+    $ brew install curl
+
+(provided you’re using [Homebrew](https://brew.sh/)).
+
+Windows users are able to just install this pacakge since it uses the
+same, clever “anticonf” that Jeroen uses in the [{curl}
+pacakge](https://github.com/jeroen/curl).
+
+The state of the availability of `libcurl` v7.62.0 across Linux
+distributions is sketch at best (as an example, Ubuntu bionic and comic
+are not even remotely at the current version). If your distribution does
+not have \>= 7.62.0 available you will need to [compile and install it
+manually](https://curl.haxx.se/download.html) ensuring the library and
+headers are available to R to build the package.
 
 ## What’s Inside The Tin
 
@@ -160,9 +182,9 @@ microbenchmark(
 
 mb
 ## Unit: microseconds
-##       expr     min      lq     mean   median       uq      max neval cld
-##  curlparse 799.909 842.713 907.3988 881.0535 924.5220 4892.528   500   b
-##   urltools 657.364 693.869 745.7828 721.2950 768.6505 4292.258   500  a
+##       expr     min       lq     mean  median       uq      max neval
+##  curlparse 650.357 685.5585 942.4718 774.454 935.5125 7926.342   500
+##   urltools 510.676 542.7305 770.9576 591.866 746.7820 4595.759   500
 
 autoplot(mb)
 ```
@@ -342,9 +364,9 @@ all(
 
 | Lang         | \# Files | (%) | LoC |  (%) | Blank lines |  (%) | \# Lines |  (%) |
 | :----------- | -------: | --: | --: | ---: | ----------: | ---: | -------: | ---: |
-| C++          |        2 | 0.2 | 286 | 0.68 |          65 | 0.51 |       58 | 0.32 |
-| Rmd          |        1 | 0.1 |  85 | 0.20 |          49 | 0.38 |       59 | 0.32 |
-| R            |        6 | 0.6 |  46 | 0.11 |          14 | 0.11 |       67 | 0.36 |
+| C++          |        2 | 0.2 | 286 | 0.68 |          65 | 0.48 |       58 | 0.30 |
+| Rmd          |        1 | 0.1 |  85 | 0.20 |          56 | 0.41 |       68 | 0.35 |
+| R            |        6 | 0.6 |  46 | 0.11 |          14 | 0.10 |       67 | 0.35 |
 | Bourne Shell |        1 | 0.1 |   2 | 0.00 |           0 | 0.00 |        0 | 0.00 |
 
 ## Code of Conduct
