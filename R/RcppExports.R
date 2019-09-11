@@ -8,7 +8,7 @@
 #' @return data frame (tibble)
 #' @export
 parse_curl <- function(urls) {
-    .Call('_curlparse_parse_curl', PACKAGE = 'curlparse', urls)
+    .Call(`_curlparse_parse_curl`, urls)
 }
 
 #' Parse a character vector of URLs into component parts (`urltools` compatibility function)
@@ -18,7 +18,7 @@ parse_curl <- function(urls) {
 #' @return data frame (not a tibble)
 #' @export
 url_parse <- function(urls) {
-    .Call('_curlparse_url_parse', PACKAGE = 'curlparse', urls)
+    .Call(`_curlparse_url_parse`, urls)
 }
 
 #' Extract member components from a URL string
@@ -28,54 +28,54 @@ url_parse <- function(urls) {
 #' @return character vector of the extracted URL component
 #' @export
 scheme <- function(urls) {
-    .Call('_curlparse_scheme', PACKAGE = 'curlparse', urls)
+    .Call(`_curlparse_scheme`, urls)
 }
 
 #' @rdname scheme
 #' @export
 user <- function(urls) {
-    .Call('_curlparse_user', PACKAGE = 'curlparse', urls)
+    .Call(`_curlparse_user`, urls)
 }
 
 #' @rdname scheme
 #' @export
 password <- function(urls) {
-    .Call('_curlparse_password', PACKAGE = 'curlparse', urls)
+    .Call(`_curlparse_password`, urls)
 }
 
 #' @rdname scheme
 #' @export
 host <- function(urls) {
-    .Call('_curlparse_host', PACKAGE = 'curlparse', urls)
+    .Call(`_curlparse_host`, urls)
 }
 
 #' @rdname scheme
 #' @export
 port <- function(urls) {
-    .Call('_curlparse_port', PACKAGE = 'curlparse', urls)
+    .Call(`_curlparse_port`, urls)
 }
 
 #' @rdname scheme
 #' @export
 path <- function(urls) {
-    .Call('_curlparse_path', PACKAGE = 'curlparse', urls)
+    .Call(`_curlparse_path`, urls)
 }
 
 #' @rdname scheme
 #' @export
 url_options <- function(urls) {
-    .Call('_curlparse_url_options', PACKAGE = 'curlparse', urls)
+    .Call(`_curlparse_url_options`, urls)
 }
 
 #' @rdname scheme
 #' @export
 query <- function(urls) {
-    .Call('_curlparse_query', PACKAGE = 'curlparse', urls)
+    .Call(`_curlparse_query`, urls)
 }
 
 #' @rdname scheme
 #' @export
 fragment <- function(urls) {
-    .Call('_curlparse_fragment', PACKAGE = 'curlparse', urls)
+    .Call(`_curlparse_fragment`, urls)
 }
 

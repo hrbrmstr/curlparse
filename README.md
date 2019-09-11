@@ -5,7 +5,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![Signed
 by](https://img.shields.io/badge/Keybase-Verified-brightgreen.svg)](https://keybase.io/hrbrmstr)
 ![Signed commit
-%](https://img.shields.io/badge/Signed_Commits-80.0%25-lightgrey.svg)
+%](https://img.shields.io/badge/Signed_Commits-83.3%25-lightgrey.svg)
 [![Linux build
 Status](https://travis-ci.org/hrbrmstr/curlparse.svg?branch=master)](https://travis-ci.org/hrbrmstr/curlparse)
 [![Windows build
@@ -14,7 +14,7 @@ status](https://ci.appveyor.com/api/projects/status/github/hrbrmstr/curlparse?sv
 Status](https://codecov.io/gh/hrbrmstr/curlparse/branch/master/graph/badge.svg)](https://codecov.io/gh/hrbrmstr/curlparse)
 ![Minimal R
 Version](https://img.shields.io/badge/R%3E%3D-3.2.0-blue.svg)
-![License](https://img.shields.io/badge/License-MIT-blue.svg)
+![License](https://img.shields.io/badge/License-Z-blue.svg)
 
 # curlparse
 
@@ -60,9 +60,13 @@ The following functions are implemented:
 ## Installation
 
 ``` r
+remotes::install_git("https://git.rud.is/hrbrmstr/curlparse.git")
+# or
 remotes::install_git("https://git.sr.ht/~hrbrmstr/curlparse")
 # or
 remotes::install_gitlab("hrbrmstr/curlparse")
+# or
+remotes::install_bitbucket("hrbrmstr/curlparse")
 # or
 remotes::install_github("hrbrmstr/curlparse")
 ```
@@ -182,9 +186,9 @@ microbenchmark(
 
 mb
 ## Unit: microseconds
-##       expr     min       lq     mean  median       uq      max neval
-##  curlparse 650.357 685.5585 942.4718 774.454 935.5125 7926.342   500
-##   urltools 510.676 542.7305 770.9576 591.866 746.7820 4595.759   500
+##       expr     min       lq     mean   median       uq      max neval cld
+##  curlparse 794.686 836.9005 893.4829 878.3295 919.0675 4492.718   500   b
+##   urltools 670.631 705.1925 764.8708 738.3700 782.3535 4834.614   500  a
 
 autoplot(mb)
 ```
@@ -364,9 +368,9 @@ all(
 
 | Lang         | \# Files | (%) | LoC |  (%) | Blank lines |  (%) | \# Lines |  (%) |
 | :----------- | -------: | --: | --: | ---: | ----------: | ---: | -------: | ---: |
-| C++          |        2 | 0.2 | 286 | 0.68 |          65 | 0.48 |       58 | 0.30 |
-| Rmd          |        1 | 0.1 |  85 | 0.20 |          56 | 0.41 |       68 | 0.35 |
-| R            |        6 | 0.6 |  46 | 0.11 |          14 | 0.10 |       67 | 0.35 |
+| C++          |        2 | 0.2 | 280 | 0.68 |          65 | 0.48 |       58 | 0.30 |
+| Rmd          |        1 | 0.1 |  85 | 0.21 |          56 | 0.41 |       70 | 0.36 |
+| R            |        6 | 0.6 |  46 | 0.11 |          14 | 0.10 |       67 | 0.34 |
 | Bourne Shell |        1 | 0.1 |   2 | 0.00 |           0 | 0.00 |        0 | 0.00 |
 
 ## Code of Conduct

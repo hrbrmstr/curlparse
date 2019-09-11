@@ -9,5 +9,5 @@
 #' @author Bob Rudis (bob@@rud.is)
 #' @importFrom stringi stri_detect_regex stri_opts_regex
 #' @importFrom Rcpp sourceCpp
-#' @useDynLib curlparse
+#' @useDynLib curlparse, .registration = TRUE
 "_PACKAGE"

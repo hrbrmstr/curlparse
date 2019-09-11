@@ -6,122 +6,122 @@
 using namespace Rcpp;
 
 // parse_curl
-DataFrame parse_curl(CharacterVector urls);
+DataFrame parse_curl(StringVector urls);
 RcppExport SEXP _curlparse_parse_curl(SEXP urlsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector >::type urls(urlsSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type urls(urlsSEXP);
     rcpp_result_gen = Rcpp::wrap(parse_curl(urls));
     return rcpp_result_gen;
 END_RCPP
 }
 // url_parse
-DataFrame url_parse(CharacterVector urls);
+DataFrame url_parse(StringVector urls);
 RcppExport SEXP _curlparse_url_parse(SEXP urlsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector >::type urls(urlsSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type urls(urlsSEXP);
     rcpp_result_gen = Rcpp::wrap(url_parse(urls));
     return rcpp_result_gen;
 END_RCPP
 }
 // scheme
-CharacterVector scheme(CharacterVector urls);
+StringVector scheme(StringVector urls);
 RcppExport SEXP _curlparse_scheme(SEXP urlsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector >::type urls(urlsSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type urls(urlsSEXP);
     rcpp_result_gen = Rcpp::wrap(scheme(urls));
     return rcpp_result_gen;
 END_RCPP
 }
 // user
-CharacterVector user(CharacterVector urls);
+StringVector user(StringVector urls);
 RcppExport SEXP _curlparse_user(SEXP urlsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector >::type urls(urlsSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type urls(urlsSEXP);
     rcpp_result_gen = Rcpp::wrap(user(urls));
     return rcpp_result_gen;
 END_RCPP
 }
 // password
-CharacterVector password(CharacterVector urls);
+StringVector password(StringVector urls);
 RcppExport SEXP _curlparse_password(SEXP urlsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector >::type urls(urlsSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type urls(urlsSEXP);
     rcpp_result_gen = Rcpp::wrap(password(urls));
     return rcpp_result_gen;
 END_RCPP
 }
 // host
-CharacterVector host(CharacterVector urls);
+StringVector host(StringVector urls);
 RcppExport SEXP _curlparse_host(SEXP urlsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector >::type urls(urlsSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type urls(urlsSEXP);
     rcpp_result_gen = Rcpp::wrap(host(urls));
     return rcpp_result_gen;
 END_RCPP
 }
 // port
-CharacterVector port(CharacterVector urls);
+StringVector port(StringVector urls);
 RcppExport SEXP _curlparse_port(SEXP urlsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector >::type urls(urlsSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type urls(urlsSEXP);
     rcpp_result_gen = Rcpp::wrap(port(urls));
     return rcpp_result_gen;
 END_RCPP
 }
 // path
-CharacterVector path(CharacterVector urls);
+StringVector path(StringVector urls);
 RcppExport SEXP _curlparse_path(SEXP urlsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector >::type urls(urlsSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type urls(urlsSEXP);
     rcpp_result_gen = Rcpp::wrap(path(urls));
     return rcpp_result_gen;
 END_RCPP
 }
 // url_options
-CharacterVector url_options(CharacterVector urls);
+StringVector url_options(StringVector urls);
 RcppExport SEXP _curlparse_url_options(SEXP urlsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector >::type urls(urlsSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type urls(urlsSEXP);
     rcpp_result_gen = Rcpp::wrap(url_options(urls));
     return rcpp_result_gen;
 END_RCPP
 }
 // query
-CharacterVector query(CharacterVector urls);
+StringVector query(StringVector urls);
 RcppExport SEXP _curlparse_query(SEXP urlsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector >::type urls(urlsSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type urls(urlsSEXP);
     rcpp_result_gen = Rcpp::wrap(query(urls));
     return rcpp_result_gen;
 END_RCPP
 }
 // fragment
-CharacterVector fragment(CharacterVector urls);
+StringVector fragment(StringVector urls);
 RcppExport SEXP _curlparse_fragment(SEXP urlsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector >::type urls(urlsSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type urls(urlsSEXP);
     rcpp_result_gen = Rcpp::wrap(fragment(urls));
     return rcpp_result_gen;
 END_RCPP

@@ -5,7 +5,7 @@
 
 using namespace Rcpp;
 
-String lc_url_get(CURLU *url, CURLUPart what, unsigned int flags = 0) {
+static inline String lc_url_get(CURLU *url, CURLUPart what, unsigned int flags = 0) {
 
   char *thing;
   CURLUcode rc = curl_url_get(url, what, &thing, flags);
@@ -27,29 +27,27 @@ String lc_url_get(CURLU *url, CURLUPart what, unsigned int flags = 0) {
 //' @return data frame (tibble)
 //' @export
 // [[Rcpp::export]]
-DataFrame parse_curl(CharacterVector urls) {
+DataFrame parse_curl(StringVector urls) {
 
-  unsigned int input_size = urls.size();
+  R_xlen_t input_size = urls.size();
 
-  CharacterVector scheme_vec(input_size);
-  CharacterVector user_vec(input_size);
-  CharacterVector password_vec(input_size);
-  CharacterVector host_vec(input_size);
-  CharacterVector port_vec(input_size);
-  CharacterVector path_vec(input_size);
-  CharacterVector options_vec(input_size);
-  CharacterVector query_vec(input_size);
-  CharacterVector fragment_vec(input_size);
+  StringVector scheme_vec(input_size);
+  StringVector user_vec(input_size);
+  StringVector password_vec(input_size);
+  StringVector host_vec(input_size);
+  StringVector port_vec(input_size);
+  StringVector path_vec(input_size);
+  StringVector options_vec(input_size);
+  StringVector query_vec(input_size);
+  StringVector fragment_vec(input_size);
 
   CURLUcode rc;
   CURLU *url;
 
-  for (unsigned int i = 0; i < input_size; i++) {
+  for (R_xlen_t i = 0; i < input_size; i++) {
 
     url = curl_url();
-    rc = curl_url_set(
-      url, CURLUPART_URL, Rcpp::as<std::string>(urls[i]).c_str(), 0
-    );
+    rc = curl_url_set(url, CURLUPART_URL, urls[i], 0);
 
     if (!rc) {
 
@@ -94,7 +92,7 @@ DataFrame parse_curl(CharacterVector urls) {
     _["stringsAsFactors"] = false
   );
 
-  out.attr("class") = CharacterVector::create("tbl_df", "tbl", "data.frame");
+  out.attr("class") = StringVector::create("tbl_df", "tbl", "data.frame");
 
   return(out);
 
@@ -108,26 +106,24 @@ DataFrame parse_curl(CharacterVector urls) {
 //' @return data frame (not a tibble)
 //' @export
 // [[Rcpp::export]]
-DataFrame url_parse(CharacterVector urls) {
+DataFrame url_parse(StringVector urls) {
 
-  unsigned int input_size = urls.size();
+  R_xlen_t input_size = urls.size();
 
-  CharacterVector scheme_vec(input_size);
-  CharacterVector host_vec(input_size);
-  CharacterVector port_vec(input_size);
-  CharacterVector path_vec(input_size);
-  CharacterVector query_vec(input_size);
-  CharacterVector fragment_vec(input_size);
+  StringVector scheme_vec(input_size);
+  StringVector host_vec(input_size);
+  StringVector port_vec(input_size);
+  StringVector path_vec(input_size);
+  StringVector query_vec(input_size);
+  StringVector fragment_vec(input_size);
 
   CURLUcode rc;
   CURLU *url;
 
-  for (unsigned int i = 0; i < input_size; i++) {
+  for (R_xlen_t i = 0; i < input_size; i++) {
 
     url = curl_url();
-    rc = curl_url_set(
-      url, CURLUPART_URL, Rcpp::as<std::string>(urls[i]).c_str(), 0
-    );
+    rc = curl_url_set(url, CURLUPART_URL, urls[i], 0);
 
     if (!rc) {
 
@@ -168,20 +164,18 @@ DataFrame url_parse(CharacterVector urls) {
 }
 
 
-CharacterVector lc_part(CharacterVector urls, CURLUPart what, unsigned int flags = 0) {
+StringVector lc_part(StringVector urls, CURLUPart what, unsigned int flags = 0) {
 
-  unsigned int input_size = urls.size();
-  CharacterVector output(input_size);
+  R_xlen_t input_size = urls.size();
+  StringVector output(input_size);
 
   CURLUcode rc;
   CURLU *url;
 
-  for (unsigned int i = 0; i < input_size; i++) {
+  for (R_xlen_t i = 0; i < input_size; i++) {
 
     url = curl_url();
-    rc = curl_url_set(
-      url, CURLUPART_URL, Rcpp::as<std::string>(urls[i]).c_str(), 0
-    );
+    rc = curl_url_set(url, CURLUPART_URL, urls[i], 0);
 
     output[i] = (!rc) ? lc_url_get(url, what, flags) : NA_STRING;
 
@@ -200,62 +194,62 @@ CharacterVector lc_part(CharacterVector urls, CURLUPart what, unsigned int flags
 //' @return character vector of the extracted URL component
 //' @export
 // [[Rcpp::export]]
-CharacterVector scheme(CharacterVector urls) {
+StringVector scheme(StringVector urls) {
   return(lc_part(urls, CURLUPART_SCHEME, CURLU_DEFAULT_SCHEME));
 }
 
 //' @rdname scheme
 //' @export
 // [[Rcpp::export]]
-CharacterVector user(CharacterVector urls) {
+StringVector user(StringVector urls) {
   return(lc_part(urls, CURLUPART_USER));
 }
 
 //' @rdname scheme
 //' @export
 // [[Rcpp::export]]
-CharacterVector password(CharacterVector urls) {
+StringVector password(StringVector urls) {
   return(lc_part(urls, CURLUPART_PASSWORD));
 }
 
 //' @rdname scheme
 //' @export
 // [[Rcpp::export]]
-CharacterVector host(CharacterVector urls) {
+StringVector host(StringVector urls) {
   return(lc_part(urls, CURLUPART_HOST));
 }
 
 //' @rdname scheme
 //' @export
 // [[Rcpp::export]]
-CharacterVector port(CharacterVector urls) {
+StringVector port(StringVector urls) {
   return(lc_part(urls, CURLUPART_PORT, CURLU_DEFAULT_PORT));
 }
 
 //' @rdname scheme
 //' @export
 // [[Rcpp::export]]
-CharacterVector path(CharacterVector urls) {
+StringVector path(StringVector urls) {
   return(lc_part(urls, CURLUPART_PATH, CURLU_URLDECODE));
 }
 
 //' @rdname scheme
 //' @export
 // [[Rcpp::export]]
-CharacterVector url_options(CharacterVector urls) {
+StringVector url_options(StringVector urls) {
   return(lc_part(urls, CURLUPART_OPTIONS));
 }
 
 //' @rdname scheme
 //' @export
 // [[Rcpp::export]]
-CharacterVector query(CharacterVector urls) {
+StringVector query(StringVector urls) {
   return(lc_part(urls, CURLUPART_QUERY, CURLU_URLENCODE));
 }
 
 //' @rdname scheme
 //' @export
 // [[Rcpp::export]]
-CharacterVector fragment(CharacterVector urls) {
+StringVector fragment(StringVector urls) {
   return(lc_part(urls, CURLUPART_FRAGMENT));
 }
